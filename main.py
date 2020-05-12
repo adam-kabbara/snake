@@ -1,16 +1,24 @@
 import pygame
 import random
+import tkinter
+from tkinter import messagebox
+import json
 
 pygame.init()
+root = tkinter.Tk()
+root.withdraw()
 
 width = 500
 height = 500
-rows = 20
-len_between = width // rows
+rows = 25
+len_between = height // rows
 
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
+
+with open('highscore.json', 'r') as f:
+    high_score = json.load(f)
 
 
 class Cube:
@@ -28,7 +36,7 @@ class Cube:
     def draw(self, surface, first_cube=False):
 
         if first_cube:
-            color = tuple(abs(c - 50) for c in self.color)
+            color = (255, 150, 150)
             pygame.draw.rect(surface, color, (self.pos[0] * len_between + 1, self.pos[1] * len_between + 1, len_between - 1, len_between - 1))
         else:
             pygame.draw.rect(surface, self.color, (self.pos[0] * len_between + 1, self.pos[1] * len_between + 1, len_between - 1, len_between - 1))
@@ -44,6 +52,7 @@ class Snake:
         self.body.append(self.head)
         self.dir_x = 0
         self.dir_y = 0
+        self.pos = pos
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -77,7 +86,10 @@ class Snake:
             else:
                 cube.move(cube.dir_x, cube.dir_y)
 
-        # check collision with walls
+        # check collision
+        body_copy = self.body[:]
+        body_copy.pop(0)
+        snake_positions = [cube.pos for cube in body_copy]
         if self.head.pos[0] < 0:
             lose()
         elif self.head.pos[0] > rows - 1:
@@ -86,9 +98,13 @@ class Snake:
             lose()
         elif self.head.pos[1] > rows - 1:
             lose()
+        elif self.body[0].pos in snake_positions:
+            lose()
 
     def reset(self):
-        pass
+        self.body = []
+        self.head = Cube(self.pos)
+        self.body.append(self.head)
 
     def add_cube(self):
         tail = self.body[-1]
@@ -96,13 +112,13 @@ class Snake:
         dir_y = tail.dir_y
 
         if dir_x == 1 and dir_y == 0:
-            self.body.append(Cube(tail.pos[0] - 1, tail.pos[1]))
+            self.body.append(Cube((tail.pos[0] - 1, tail.pos[1])))
         elif dir_x == -1 and dir_y == 0:
-            self.body.append(Cube(tail.pos[0] + 1, tail.pos[1]))
+            self.body.append(Cube((tail.pos[0] + 1, tail.pos[1])))
         elif dir_y == 1 and dir_x == 0:
-            self.body.append(Cube(tail.pos[0], tail.pos[1] - 1))
-        elif dir_x == -1 and dir_x == 0:
-            self.body.append(Cube(tail.pos[0], tail.pos[1] + 1))
+            self.body.append(Cube((tail.pos[0], tail.pos[1] - 1)))
+        elif dir_y == -1 and dir_x == 0:
+            self.body.append(Cube((tail.pos[0], tail.pos[1] + 1)))
 
         self.body[-1].dir_x = dir_x
         self.body[-1].dir_y = dir_y
@@ -144,33 +160,56 @@ def random_snack():
 
 
 def lose():
-    print(random.random())
-    print()
+    global run, score
+    again = messagebox.askyesno('Game over', 'Do you want to play again')
+    if again:
+        s.reset()
+        score = 0
+        # we do this so the pygame window will be refocused on
+        pygame.display.set_mode((width, height))
+    else:
+        run = False
 
 
 def redraw_window():
     win.fill((0, 0, 0))
     draw_grid()
+
+    # draw score and high score
+    score_font = pygame.font.SysFont('comicsans', 25)
+    text = score_font.render(f'SCORE {score}', True, (200, 200, 100))
+    win.blit(text, (0, height - 20))
+    high_score_font = pygame.font.SysFont('comicsans', 25)
+    text = high_score_font.render(f'HIGH SCORE {high_score}', True, (200, 200, 100))
+    win.blit(text, (width - 125 - len(str(high_score)) * 7, height - 20))
+
     s.draw(win)
     snack.draw(win)
     pygame.display.update()
 
 
 run = True
+score = 0
 s = Snake((255, 0, 0), (rows // 2, rows // 2))
 snack = Cube(random_snack(), color=(0, 255, 0))
 
 while run:
-    pygame.time.delay(50)
-    clock.tick(10)
+    clock.tick(9.5)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
     s.move()
+
+    # check collision with snack
     if s.body[0].pos == snack.pos:
         s.add_cube()
         snack = Cube(random_snack(), color=(0, 255, 0))
+        score += 1
+        if score > high_score:
+            high_score = score
+            with open('highscore.json', 'w') as f:
+                json.dump(high_score, f)
 
     redraw_window()
 
