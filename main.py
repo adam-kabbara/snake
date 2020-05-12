@@ -8,10 +8,11 @@ pygame.init()
 root = tkinter.Tk()
 root.withdraw()
 
-width = 500
-height = 500
+width = 1200
+height = 600
 rows = 25
-len_between = height // rows
+len_between_height = height // rows
+len_between_width = width // rows
 
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Snake')
@@ -37,9 +38,9 @@ class Cube:
 
         if first_cube:
             color = (255, 150, 150)
-            pygame.draw.rect(surface, color, (self.pos[0] * len_between + 1, self.pos[1] * len_between + 1, len_between - 1, len_between - 1))
+            pygame.draw.rect(surface, color, (self.pos[0] * len_between_width + 1, self.pos[1] * len_between_height + 1, len_between_width - 1, len_between_height - 1))
         else:
-            pygame.draw.rect(surface, self.color, (self.pos[0] * len_between + 1, self.pos[1] * len_between + 1, len_between - 1, len_between - 1))
+            pygame.draw.rect(surface, self.color, (self.pos[0] * len_between_width + 1, self.pos[1] * len_between_height + 1, len_between_width - 1, len_between_height - 1))
 
 
 class Snake:
@@ -135,8 +136,8 @@ def draw_grid():
     x = 0
     y = 0
     for i in range(rows):
-        x += len_between
-        y += len_between
+        x += len_between_width
+        y += len_between_height
         pygame.draw.line(win, (255, 255, 255), (0, y), (width, y))
         pygame.draw.line(win, (255, 255, 255), (x, 0), (x, height))
 
