@@ -8,8 +8,8 @@ pygame.init()
 root = tkinter.Tk()
 root.withdraw()
 
-width = 1200
-height = 600
+width = 500
+height = 500
 rows = 25
 len_between_height = height // rows
 len_between_width = width // rows
@@ -106,6 +106,7 @@ class Snake:
         self.body = []
         self.head = Cube(self.pos)
         self.body.append(self.head)
+        self.turns = {}
 
     def add_cube(self):
         tail = self.body[-1]
