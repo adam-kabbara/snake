@@ -8,10 +8,10 @@ pygame.init()
 root = tkinter.Tk()
 root.withdraw()
 
-width = 1200
+width = 600
 height = 600
 w_rows = 60
-h_rows = w_rows // 2
+h_rows = 60
 len_between_height = height // h_rows
 len_between_width = width // w_rows
 
