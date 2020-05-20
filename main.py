@@ -8,11 +8,12 @@ pygame.init()
 root = tkinter.Tk()
 root.withdraw()
 
-width = 500
-height = 500
-rows = 25
-len_between_height = height // rows
-len_between_width = width // rows
+width = 1200
+height = 600
+w_rows = 60
+h_rows = w_rows // 2
+len_between_height = height // h_rows
+len_between_width = width // w_rows
 
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Snake')
@@ -93,11 +94,11 @@ class Snake:
         snake_positions = [cube.pos for cube in body_copy]
         if self.head.pos[0] < 0:
             lose()
-        elif self.head.pos[0] > rows - 1:
+        elif self.head.pos[0] > w_rows - 1:
             lose()
         elif self.head.pos[1] < 0:
             lose()
-        elif self.head.pos[1] > rows - 1:
+        elif self.head.pos[1] > h_rows - 1:
             lose()
         elif self.body[0].pos in snake_positions:
             lose()
@@ -136,18 +137,19 @@ class Snake:
 def draw_grid():
     x = 0
     y = 0
-    for i in range(rows):
-        x += len_between_width
+    for i in range(h_rows):
         y += len_between_height
         pygame.draw.line(win, (255, 255, 255), (0, y), (width, y))
+    for i in range(w_rows):
+        x += len_between_width
         pygame.draw.line(win, (255, 255, 255), (x, 0), (x, height))
 
 
 def random_snack():
     positions = s.body
     while True:
-        x = random.randrange(rows)
-        y = random.randrange(rows)
+        x = random.randrange(w_rows)
+        y = random.randrange(h_rows)
         lst = []
         for c in positions:
             if c.pos == (x, y):
@@ -192,7 +194,7 @@ def redraw_window():
 
 run = True
 score = 0
-s = Snake((255, 0, 0), (rows // 2, rows // 2))
+s = Snake((255, 0, 0), (w_rows // 2, h_rows // 2))
 snack = Cube(random_snack(), color=(0, 255, 0))
 
 while run:
