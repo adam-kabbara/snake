@@ -8,10 +8,14 @@ pygame.init()
 root = tkinter.Tk()
 root.withdraw()
 
-width = 600
-height = 600
-w_rows = 60
-h_rows = 60
+width = 500
+height = 500
+# if you want to make the height value and the width value different make sure that
+# the width height w_rows and h_rows are proportional
+# example if width = 600 and height = 1200
+# then w_rows = 60 and h_rows = 30
+w_rows = 20
+h_rows = 20
 len_between_height = height // h_rows
 len_between_width = width // w_rows
 
@@ -45,10 +49,10 @@ class Cube:
 
 
 class Snake:
-    body = []
-    turns = {}
 
     def __init__(self, color, pos):
+        self.body = []
+        self.turns = {}
         self.color = color
         self.head = Cube(pos)
         self.body.append(self.head)
@@ -108,6 +112,8 @@ class Snake:
         self.head = Cube(self.pos)
         self.body.append(self.head)
         self.turns = {}
+        self.dir_x = 0
+        self.dir_y = 0
 
     def add_cube(self):
         tail = self.body[-1]
