@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4958d78-24df-4f67-be4d-3f02cd611dcd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/snake ai/hamilton cycles.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snake ai/highscore.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snake ai/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snake ai/neigbours.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snake ai/numbering the grid (try).py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/snake ai/.idea/snake ai.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscore.json" beforeDir="false" afterPath="$PROJECT_DIR$/highscore.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snake ai/hamilton cycles.json" beforeDir="false" afterPath="$PROJECT_DIR$/snake ai/hamilton cycles.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snake ai/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/snake ai/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +28,7 @@
   <component name="ProjectId" id="1bkw601T9pTujBz3sxdqjvzjx8O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/snake ai" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -49,7 +49,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
+  <component name="RunManager" selected="Python.main(cmd)">
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="snake" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,6 +92,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main(cmd)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="snake" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/snake ai" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/snake ai/main(cmd).py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="numbering the grid (try)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="snake" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,9 +136,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main(cmd)" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.numbering the grid (try)" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.numbering the grid (try)" />
       </list>
     </recent_temporary>
   </component>

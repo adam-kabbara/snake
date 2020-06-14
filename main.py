@@ -23,7 +23,7 @@ win = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
 
-with open('highscore.json', 'r') as f:
+with open('C:\\Users\\kabba\\PythonProjects\\python project\\pygame\\snake\\highscore.json', 'r') as f:
     high_score = json.load(f)
 
 
@@ -204,7 +204,7 @@ s = Snake((255, 0, 0), (w_rows // 2, h_rows // 2))
 snack = Cube(random_snack(), color=(0, 255, 0))
 
 while run:
-    clock.tick(9.5)
+    clock.tick(9)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -218,7 +218,7 @@ while run:
         score += 1
         if score > high_score:
             high_score = score
-            with open('highscore.json', 'w') as f:
+            with open('C:\\Users\\kabba\\PythonProjects\\python project\\pygame\\snake\\highscore.json', 'w') as f:
                 json.dump(high_score, f)
 
     redraw_window()
